@@ -4,24 +4,27 @@
  * Class RandomPasswordGenerator
  *
  * @author Eftakhairul Islam <eftakhairul@gmail.com> 
- * Web    http://eftakhairul.com
+ * @web    http://eftakhairul.com
  */
-
 class RandomPasswordGenerator
-{    
-    private $vowels = 'aeiouAEIOU';    
-    private $consonants = 'bcdfghijklmnpqrstvwxyzBCDFGHIJKLMNPQRSTVWXYZ';
-    private $numbers = '1234567890';
-    private $specialChars = '@#$%^';            
-    private $flag = 1; 
-    private $numberLength = 0; 
+{
+    private $vowels             = 'aeiouAEIOU';
+    private $consonants         = 'bcdfghijklmnpqrstvwxyzBCDFGHIJKLMNPQRSTVWXYZ';
+    private $numbers            = '1234567890';
+    private $specialChars       = '@#$%^';
+    private $flag               = 1;
+    private $numberLength       = 0;
     private $specialCharsLength = 0;    
-    private $isUseNumbers = false;
-    private $isUseSpecialChars = false;    
-    
+    private $isUseNumbers       = false;
+    private $isUseSpecialChars  = false;
+
+
     /**
-    * password generator
-    */    
+     * Generate the password
+     *
+     * @param int $length
+     * @return string
+     */
     public function generatePassword($length = 8)
     {        
         $password = '';
@@ -53,34 +56,48 @@ class RandomPasswordGenerator
         }
         
         if ($this->isUseNumbers === true) {
-            for ($count = 0; $count < $this->numberLength; $count++) {
+            for ($count = 0; $count < $this->numberLength; $count++)
+            {
                 $password .= $this->numbers[mt_rand(0,9)];                
-                }  
+            }
         }
         
         return $password;        
-    }  
-    
+    }
+
+
     /**
-    * Numbers set
-    */    
-    public function useNumbers($length = 2) 
+     * Set the length of number set and set active the isUseNumbers flag
+     *
+     * @param int $length
+     * @return \RandomPasswordGenerator
+     */
+    public function useNumbers($length = 2)
     {
         $this->numberLength = $length;
-        $this->isUseNumbers = true;  
+        $this->isUseNumbers = true;
+
         return $this;
     }
-    
+
+
     /**
-    * Special Chars set
-    */    
-    public function useSpecialChars($length = 1) 
+     * Set the length of Special Chars set and set active the isUseSpecialChars flag
+     *
+     * @param int $length
+     * @return \RandomPasswordGenerator
+     */
+    public function useSpecialChars($length = 1)
     {
         $this->specialCharsLength = $length;
-        $this->isUseSpecialChars = true;        
+        $this->isUseSpecialChars = true;
+
         return $this;
     }
-    
+
+    /**
+     * @return mixed
+     */
     private function upperCaseChar()
     {
         if ($this->flag === 1) {            
@@ -91,7 +108,10 @@ class RandomPasswordGenerator
             return $this->consonants[mt_rand(22, 43)];
         }
     }
-    
+
+    /**
+     * @return mixed
+     */
     private function lowerCaseChar()
     {
         if ($this->flag === 0) {
@@ -101,8 +121,6 @@ class RandomPasswordGenerator
         } else {
             $this->flag = 0;
             return $this->consonants[mt_rand(0, 21)];
-                        
         }
-    }    
-    
+    }
 }

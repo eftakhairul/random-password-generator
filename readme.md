@@ -1,11 +1,24 @@
 Random Password Generator
-=============================================================================
+=========
 
-@author: Eftakhairul Islam <eftakhairul@gmail.com>
-@web   : http://eftakhairul.com
+PHP based tiny password generator library. It will generate password for you PHP application.
 
 
-Description
-==============================================================================
-This is an open souce PHP library. It generates automatic password for your 
-web application. 
+
+Author
+-----------
+
+
+ [Eftakhairul Islam] - eftakhairul [at] gmail [dot] com
+
+
+
+
+License
+----
+
+MIT
+
+
+
+[Eftakhairul Islam]:http://eftakhairul.com/

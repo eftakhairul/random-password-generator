@@ -11,7 +11,7 @@ class RandomPasswordGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testCanBeNegated()
     {
         // Arrange
-        $passwordGenerator =  new Eftakahirul\RandomPasswordGenerator();
+        $passwordGenerator =  new Eftakhairul\RandomPasswordGenerator();
 
         $this->assertEquals(9, strlen($passwordGenerator->useNumbers()->generatePassword(9) ));
     }

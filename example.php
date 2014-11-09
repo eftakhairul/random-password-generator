@@ -6,8 +6,7 @@
  * @author Eftakhairul Islam <eftakhairul@gmail.com> * 
  * Web    http://eftakhairul.com
  */
-
-require_once './RandomPasswordGenerator.php';
+require_once './src/RandomPasswordGenerator.php';
 
 $testPass =  new RandomPasswordGenerator();
 echo $testPass->useNumbers()->generatePassword(9) ; 

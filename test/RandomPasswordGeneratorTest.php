@@ -6,7 +6,7 @@
  * @author Eftakhairul Islam <eftakhairul@gmail.com> 
  * @web    http://eftakhairul.com
  */
-class RandomPasswordGeneratorTest extends PHPUnit_Framework_TestCase
+class RandomPasswordGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     public function testCanBeNegated()
     {

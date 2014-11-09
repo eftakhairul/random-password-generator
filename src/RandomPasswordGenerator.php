@@ -6,6 +6,8 @@
  * @author Eftakhairul Islam <eftakhairul@gmail.com> 
  * @web    http://eftakhairul.com
  */
+namespace eftakhairul;
+
 class RandomPasswordGenerator
 {
     private $vowels             = 'aeiouAEIOU';

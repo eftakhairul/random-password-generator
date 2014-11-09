@@ -3,21 +3,20 @@
     "description": "A tiny library to generate password in application",
     "keywords": ["password"],
     "homepage": "https://github.com/eftakhairul/random-password-generator",
-    "license": "BSD-3-Clause",
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Eftakahirul Islam",
-            "email": "eftakhairul@gmail.com"
+            "email": "eftakhairul@gmail.com",
+            "homepage": "http://eftakhairul.com"
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "ext-intl": "*"
+        "php": ">=5.3.0"
     },
     "autoload": {
-        "classmap": [
-            "src/"
-        ]
+         "psr-4": {"Eftakahirul\\": "src"}
     },
     "extra": {
         "branch-alias": {

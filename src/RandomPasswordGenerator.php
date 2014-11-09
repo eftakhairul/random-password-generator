@@ -6,7 +6,7 @@
  * @author Eftakhairul Islam <eftakhairul@gmail.com> 
  * @web    http://eftakhairul.com
  */
-namespace eftakhairul;
+namespace Eftakhairul;
 
 class RandomPasswordGenerator
 {

@@ -4,6 +4,7 @@
     "keywords": ["password"],
     "homepage": "https://github.com/eftakhairul/random-password-generator",
     "type": "library",
+    "version": "1.0.0",
     "license": "MIT",
     "authors": [
         {

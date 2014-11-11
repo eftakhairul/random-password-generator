@@ -26,6 +26,6 @@ Author
 -----------
 
 
- [Eftakhairul Islam] - eftakhairul [at] gmail [dot] com
+[Eftakhairul Islam] - eftakhairul [at] gmail [dot] com
 
 [Eftakhairul Islam]:http://eftakhairul.com/

@@ -10,7 +10,7 @@
 
 if (is_file(__DIR__ . '/../vendor/autoload.php')) {
     $autoloader = require __DIR__ . '/../vendor/autoload.php';
-    $autoloader->addPsr4('Eftakhairul\\', __DIR__.'/../src');
+    $autoloader->addPsr4('Eftakhairul\\', __DIR__ . '/../src');
 } else {
     throw new \Exception('Run "composer install --dev" to create autoloader.');
 }

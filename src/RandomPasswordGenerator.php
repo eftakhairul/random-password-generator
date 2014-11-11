@@ -22,7 +22,7 @@ class RandomPasswordGenerator
 
 
     /**
-     * Generate the password
+     * Generate the password based on filter parameters
      *
      * @param int $length
      * @return string
@@ -43,7 +43,8 @@ class RandomPasswordGenerator
             $this->isUseSpecialChars = false;           
         }
         
-        for ($count = 0; $count < $length; $count++) {
+        for ($count = 0; $count < $length; $count++)
+        {
             if($count < $length/2){
                 $password .= $this->upperCaseChar();              
             } else {
@@ -52,9 +53,11 @@ class RandomPasswordGenerator
         }
         
         if ($this->isUseSpecialChars === true) {
-            for ($count = 0; $count < $this->specialCharsLength; $count++) {
+
+            for ($count = 0; $count < $this->specialCharsLength; $count++)
+            {
                 $password .= $this->specialChars[mt_rand(0,4)];
-                }
+            }
         }
         
         if ($this->isUseNumbers === true) {

@@ -5,6 +5,10 @@
  *
  * @author Eftakhairul Islam <eftakhairul@gmail.com> 
  * @web    http://eftakhairul.com
+ *
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 namespace Eftakhairul;
 
@@ -101,7 +105,10 @@ class RandomPasswordGenerator
     }
 
     /**
-     * @return mixed
+     * Internal function
+     *  It returns upper case characters of vowels or consonants
+     *
+     * @return string
      */
     private function upperCaseChar()
     {
@@ -115,7 +122,10 @@ class RandomPasswordGenerator
     }
 
     /**
-     * @return mixed
+     * Internal function
+     *  It returns lower case characters of vowels or consonants
+     *
+     * @return string
      */
     private function lowerCaseChar()
     {

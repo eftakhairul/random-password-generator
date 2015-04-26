@@ -1,4 +1,5 @@
-# Random Password Generator  [![Build Status](https://travis-ci.org/eftakhairul/random-password-generator.svg?branch=master)](https://travis-ci.org/eftakhairul/random-password-generator)
+# Random Password Generator  Library 
+[![Build Status](https://travis-ci.org/eftakhairul/random-password-generator.svg?branch=master)](https://travis-ci.org/eftakhairul/random-password-generator)
 [![GitHub issues](https://img.shields.io/github/issues/eftakhairul/random-password-generator.svg)](https://github.com/eftakhairul/random-password-generator/issues)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eftakhairul/random-password-generator/master/LICENSE)
 

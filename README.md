@@ -24,9 +24,18 @@ License
 -------
 MIT
 
+Contributing
+-----------
+[Here](https://github.com/eftakhairul/random-password-generator/blob/master/CONTRIBUTING.md)
 
 Author
 -----------
 [Eftakhairul Islam] - eftakhairul [at] gmail [dot] com
 
 [Eftakhairul Islam]:http://eftakhairul.com/
+
+Contributors
+-----------
+[Matthew Baggett] 
+
+[Matthew Baggett]:https://github.com/matthewbaggett

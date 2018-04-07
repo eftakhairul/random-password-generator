@@ -9,7 +9,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-class RandomPasswordGeneratorTest extends \PHPUnit_Framework_TestCase
+namespace Eftakhairul;
+
+use PHPUnit\Framework\TestCase;
+
+class RandomPasswordGeneratorTest extends TestCase
 {
     /**
      * Checking password's characters count correct or not
@@ -17,7 +21,7 @@ class RandomPasswordGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testIsReturnCorrectStringCount()
     {
         //Create object
-        $passwordGenerator =  new Eftakhairul\RandomPasswordGenerator();
+        $passwordGenerator =  new RandomPasswordGenerator();
 
         //checking password's characters count correct or not
         $this->assertEquals(9, strlen($passwordGenerator->useNumbers()->generatePassword(9) ));
@@ -30,10 +34,23 @@ class RandomPasswordGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testIsNumberContain()
     {
         //Create object
-        $passwordGenerator = new Eftakhairul\RandomPasswordGenerator();
+        $passwordGenerator = new RandomPasswordGenerator();
         $output            = preg_match("/[0-9]/i", $passwordGenerator->useNumbers(3)->generatePassword());
 
         //checking number exists inside password string or not
-        $this->assertEquals(true, $output);
+        $this->assertEquals(1, $output);
+    }
+
+    /**
+     * Checking the password with the special chars
+     */
+    public function testUseSpecialChars()
+    {
+        //Create object
+        $passwordGenerator = new RandomPasswordGenerator();
+        $output            = preg_match("/[@#$%^]/i", $passwordGenerator->useSpecialChars()->generatePassword());
+
+        //checking password's character has the special characters
+        $this->assertEquals(1, $output);
     }
 }

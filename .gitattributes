@@ -1,0 +1,9 @@
+* text=auto eol=lf
+/.github            export-ignore
+/tests              export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/phpunit.xml.dist   export-ignore
+/phpstan.neon.dist  export-ignore
+/upgrade_spec.md    export-ignore
+/CONTRIBUTING.md    export-ignore

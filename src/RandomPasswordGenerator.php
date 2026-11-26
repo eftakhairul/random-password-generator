@@ -31,6 +31,10 @@ final class RandomPasswordGenerator
 
     private readonly Randomizer $randomizer;
 
+    private int $numberCount = 0;
+
+    private int $specialCharCount = 0;
+
     /**
      * @param Randomizer|null $randomizer Source of randomness. Defaults to the
      *        CSPRNG-backed Secure engine. Pass a seeded engine only in tests.
@@ -41,9 +45,45 @@ final class RandomPasswordGenerator
     }
 
     /**
-     * Generate a password of the given length.
+     * Include exactly $count digits in every generated password. 0 disables digits.
      *
-     * @throws \InvalidArgumentException If the length is outside 1..MAX_LENGTH.
+     * @throws \InvalidArgumentException If $count is negative.
+     */
+    public function useNumbers(int $count = 2): self
+    {
+        if ($count < 0) {
+            throw new \InvalidArgumentException("Number count must be zero or greater, got {$count}.");
+        }
+        $this->numberCount = $count;
+
+        return $this;
+    }
+
+    /**
+     * Include exactly $count characters from SPECIAL_CHARS in every generated
+     * password. 0 disables special characters.
+     *
+     * @throws \InvalidArgumentException If $count is negative.
+     */
+    public function useSpecialChars(int $count = 1): self
+    {
+        if ($count < 0) {
+            throw new \InvalidArgumentException("Special character count must be zero or greater, got {$count}.");
+        }
+        $this->specialCharCount = $count;
+
+        return $this;
+    }
+
+    /**
+     * Generate a password of the given length. Digits and special characters
+     * (if enabled) are mixed with letters at random positions.
+     *
+     * Configured options are only read here, never modified, so a failed call
+     * leaves the instance unchanged.
+     *
+     * @throws \InvalidArgumentException If the length is outside 1..MAX_LENGTH,
+     *         or the digit and special character counts exceed the length.
      */
     public function generatePassword(int $length = self::DEFAULT_LENGTH): string
     {
@@ -55,7 +95,18 @@ final class RandomPasswordGenerator
             ));
         }
 
-        $chars = $this->pick(self::UPPERCASE . self::LOWERCASE, $length);
+        $required = $this->numberCount + $this->specialCharCount;
+        if ($required > $length) {
+            throw new \InvalidArgumentException(sprintf(
+                'Digit and special character counts (%d) exceed password length (%d).',
+                $required,
+                $length,
+            ));
+        }
+
+        $chars = $this->pick(self::DIGITS, $this->numberCount)
+            . $this->pick(self::SPECIAL_CHARS, $this->specialCharCount)
+            . $this->pick(self::UPPERCASE . self::LOWERCASE, $length - $required);
 
         return $this->randomizer->shuffleBytes($chars);
     }

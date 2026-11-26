@@ -1,33 +1,46 @@
 {
     "name": "eftakhairul/random-password-generator",
-    "description": "A tiny library to generate password in application",
-    "keywords": ["password"],
+    "description": "A tiny library to generate cryptographically secure random passwords",
+    "keywords": ["password", "generator", "random", "security"],
     "homepage": "https://github.com/eftakhairul/random-password-generator",
     "type": "library",
-    "version": "1.0.0",
     "license": "MIT",
     "authors": [
         {
-            "name": "Eftakahirul Islam",
+            "name": "Eftakhairul Islam",
             "email": "eftakhairul@gmail.com",
             "homepage": "http://eftakhairul.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/eftakhairul/random-password-generator/issues",
+        "source": "https://github.com/eftakhairul/random-password-generator"
+    },
     "require": {
-        "php": ">=5.5.0"
+        "php": "^8.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8|^5.5|^6.5"
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpunit/phpunit": "^11.5.50 || ^12.5.22"
     },
     "autoload": {
-         "psr-4": {"Eftakhairul\\": "src"}
+        "psr-4": { "Eftakhairul\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4": {"Eftakhairul\\": "tests"}
+        "psr-4": { "Eftakhairul\\Tests\\": "tests/" }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse --memory-limit=512M"
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "2.x-dev"
         }
-    }
+    },
+    "minimum-stability": "stable"
 }

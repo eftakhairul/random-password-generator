@@ -1,22 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Example of RandomPassword class
+ * Example usage of Eftakhairul\RandomPasswordGenerator.
  *
- * @author Eftakhairul Islam <eftakhairul@gmail.com> * 
- * Web    http://eftakhairul.com
+ * Run: composer install && php example.php
  */
-require_once './src/RandomPasswordGenerator.php';
 
-$testPass =  new RandomPasswordGenerator();
-echo $testPass->useNumbers()->generatePassword(9) ; 
-//Output: OBUDfej06 
+require __DIR__ . '/vendor/autoload.php';
 
-echo '<br>';
-echo $testPass->useNumbers(3)->generatePassword();
-//Output: UNEad107
+use Eftakhairul\RandomPasswordGenerator;
 
-echo '<br>';
-$testPass->useNumbers(4)->useSpecialChars(5);
-echo $testPass->generatePassword(9);
-//Output: @$#@^2763
+// 16 random letters (default).
+echo (new RandomPasswordGenerator())->generatePassword(), PHP_EOL;
+
+// 12 characters, exactly 2 of them digits.
+echo (new RandomPasswordGenerator())->useNumbers()->generatePassword(12), PHP_EOL;
+
+// 20 characters: 4 digits, 2 special characters, 14 letters, all shuffled.
+echo (new RandomPasswordGenerator())->useNumbers(4)->useSpecialChars(2)->generatePassword(20), PHP_EOL;

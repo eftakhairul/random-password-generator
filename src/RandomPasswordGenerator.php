@@ -1,141 +1,76 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * Class RandomPasswordGenerator
+ * Random Password Generator
  *
- * @author Eftakhairul Islam <eftakhairul@gmail.com> 
- * @web    http://eftakhairul.com
- *
+ * @author Eftakhairul Islam <eftakhairul@gmail.com>
+ * @link   http://eftakhairul.com
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Eftakhairul;
 
-class RandomPasswordGenerator
+use Random\Engine\Secure;
+use Random\Randomizer;
+
+/**
+ * Generates passwords using a cryptographically secure random number generator.
+ */
+final class RandomPasswordGenerator
 {
-    private $vowels             = 'aeiouAEIOU';
-    private $consonants         = 'bcdfghijklmnpqrstvwxyzBCDFGHIJKLMNPQRSTVWXYZ';
-    private $numbers            = '1234567890';
-    private $specialChars       = '@#$%^';
-    private $flag               = 1;
-    private $numberLength       = 0;
-    private $specialCharsLength = 0;    
-    private $isUseNumbers       = false;
-    private $isUseSpecialChars  = false;
+    public const DEFAULT_LENGTH = 16;
+    public const MAX_LENGTH     = 1024;
+    public const LOWERCASE      = 'abcdefghijklmnopqrstuvwxyz';
+    public const UPPERCASE      = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    public const DIGITS         = '0123456789';
+    public const SPECIAL_CHARS  = '!@#$%^&*()-_=+[]{}<>?';
 
+    private readonly Randomizer $randomizer;
 
     /**
-     * Generate the password based on filter parameters
-     *
-     * @param int $length
-     * @return string
+     * @param Randomizer|null $randomizer Source of randomness. Defaults to the
+     *        CSPRNG-backed Secure engine. Pass a seeded engine only in tests.
      */
-    public function generatePassword($length = 8)
-    {        
-        $password = '';
-        
-        if ($this->isUseNumbers === true && $length >= $this->numberLength) {
-            $length -= $this->numberLength;
-        } else {
-            $this->isUseNumbers = false;         
-        }
-        
-        if ($this->isUseSpecialChars === true && $length >= $this->specialCharsLength) {
-            $length -= $this->specialCharsLength; 
-        } else {
-            $this->isUseSpecialChars = false;           
-        }
-        
-        for ($count = 0; $count < $length; $count++)
-        {
-            if($count < $length/2){
-                $password .= $this->upperCaseChar();              
-            } else {
-                $password .= $this->lowerCaseChar(); 
-            }            
-        }
-        
-        if ($this->isUseSpecialChars === true) {
-
-            for ($count = 0; $count < $this->specialCharsLength; $count++)
-            {
-                $password .= $this->specialChars[mt_rand(0,4)];
-            }
-        }
-        
-        if ($this->isUseNumbers === true) {
-            for ($count = 0; $count < $this->numberLength; $count++)
-            {
-                $password .= $this->numbers[mt_rand(0,9)];                
-            }
-        }
-        
-        return $password;        
-    }
-
-
-    /**
-     * Set the length of number set and set active the isUseNumbers flag
-     *
-     * @param int $length
-     * @return \RandomPasswordGenerator
-     */
-    public function useNumbers($length = 2)
+    public function __construct(?Randomizer $randomizer = null)
     {
-        $this->numberLength = $length;
-        $this->isUseNumbers = true;
-
-        return $this;
-    }
-
-
-    /**
-     * Set the length of Special Chars set and set active the isUseSpecialChars flag
-     *
-     * @param int $length
-     * @return \RandomPasswordGenerator
-     */
-    public function useSpecialChars($length = 1)
-    {
-        $this->specialCharsLength = $length;
-        $this->isUseSpecialChars = true;
-
-        return $this;
+        $this->randomizer = $randomizer ?? new Randomizer(new Secure());
     }
 
     /**
-     * Internal function
-     *  It returns upper case characters of vowels or consonants
+     * Generate a password of the given length.
      *
-     * @return string
+     * @throws \InvalidArgumentException If the length is outside 1..MAX_LENGTH.
      */
-    private function upperCaseChar()
+    public function generatePassword(int $length = self::DEFAULT_LENGTH): string
     {
-        if ($this->flag === 1) {            
-            $this->flag = 0;
-            return $this->vowels[mt_rand(5,9)];
-        } else {            
-            $this->flag = 1;            
-            return $this->consonants[mt_rand(22, 43)];
+        if ($length < 1 || $length > self::MAX_LENGTH) {
+            throw new \InvalidArgumentException(sprintf(
+                'Password length must be between 1 and %d, got %d.',
+                self::MAX_LENGTH,
+                $length,
+            ));
         }
+
+        $chars = $this->pick(self::UPPERCASE . self::LOWERCASE, $length);
+
+        return $this->randomizer->shuffleBytes($chars);
     }
 
     /**
-     * Internal function
-     *  It returns lower case characters of vowels or consonants
-     *
-     * @return string
+     * Pick $count characters uniformly at random from $set.
      */
-    private function lowerCaseChar()
+    private function pick(string $set, int $count): string
     {
-        if ($this->flag === 0) {
-            $this->flag = 1;
-            return $this->vowels[mt_rand(0,4)];
-            
-        } else {
-            $this->flag = 0;
-            return $this->consonants[mt_rand(0, 21)];
+        $max = strlen($set) - 1;
+        $out = '';
+        for ($i = 0; $i < $count; $i++) {
+            $out .= $set[$this->randomizer->getInt(0, $max)];
         }
+
+        return $out;
     }
 }
